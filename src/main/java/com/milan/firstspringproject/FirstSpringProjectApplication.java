@@ -13,32 +13,4 @@ public class FirstSpringProjectApplication {
 		SpringApplication.run(FirstSpringProjectApplication.class, args);
 
 	}
-
-	@RestController
-	class Resource{
-
-		@RequestMapping(method = RequestMethod.GET)
-
-		Message getMessage(){
-			return new Message("Hello World");
-		}
-	}
-	class Message{
-		private final String message;
-
-		public Message(String message) {
-			this.message = message;
-		}
-
-		public String getMessage() {
-			return message;
-		}
-
-		@Override
-		public String toString() {
-			return "Message{" +
-					"message='" + message + '\'' +
-					'}';
-		}
-	}
 }
