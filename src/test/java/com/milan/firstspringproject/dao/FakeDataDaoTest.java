@@ -44,6 +44,7 @@ public class FakeDataDaoTest {
         Optional<User> sd = fakeDataDao.selectUserByUserId(sUid);
         assertTrue(sd.isPresent());
         assertSame(sd.get(),user);
+       // assertThat(sd.isPresent()).;
     }
 
     @Test
