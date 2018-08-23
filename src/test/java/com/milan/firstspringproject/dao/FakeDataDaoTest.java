@@ -75,7 +75,6 @@ public class FakeDataDaoTest {
         fakeDataDao.deleteUser(user.getUserUid());
         Optional<User> user2 = fakeDataDao.selectUserByUserId(user.getUserUid());
         assertFalse(user2.isPresent());
-        assertEquals(user2.isPresent(),false);
     }
 
     @Test
