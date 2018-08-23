@@ -39,7 +39,7 @@ public class FakeDataDaoTest {
                 "sd@abc.com");
         fakeDataDao.insertUser(sUid, user);
         List<User> users = fakeDataDao.selectAllUser();
-      //  assertEquals(users.size(),2);
+        assertEquals(users.size(),2);
 
         Optional<User> sd = fakeDataDao.selectUserByUserId(sUid);
         assertTrue(sd.isPresent());
@@ -69,7 +69,7 @@ public class FakeDataDaoTest {
     }
 
     @Test
-    public void deleteUser() throws Exception{
+    public void shouldDeleteUser() throws Exception{
         List<User> users = fakeDataDao.selectAllUser();
         User user = users.get(0);
         fakeDataDao.deleteUser(user.getUserUid());
@@ -78,7 +78,7 @@ public class FakeDataDaoTest {
     }
 
     @Test
-    public void insertUser() {
+    public void shouldInsertUser() {
         UUID sUid = UUID.randomUUID();
         User user = new User(sUid,
                 "setu",
@@ -87,6 +87,8 @@ public class FakeDataDaoTest {
                 26,
                 "sd@abc.com");
         fakeDataDao.insertUser(sUid,user);
-        assertEquals(fakeDataDao.selectAllUser().size(),2);
+        List<User> users = fakeDataDao.selectAllUser();
+        assertEquals(users.size(),2);
+        assertSame(fakeDataDao.selectUserByUserId(sUid).get(),user);
     }
 }

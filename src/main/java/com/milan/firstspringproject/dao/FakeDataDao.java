@@ -7,12 +7,16 @@ import java.util.*;
 @Repository
 public class FakeDataDao implements UserDao {
 
-    private static Map<UUID, User> database;
-    static {
+    private Map<UUID, User> database;
+
+
+    public FakeDataDao() {
         database = new HashMap<>();
         UUID joeuserId = UUID.randomUUID();
         database.put(joeuserId, new User(joeuserId,"milan", "desai", User.Gender.MALE, 22 , "md@abc.com"));
+
     }
+
     @Override
     public List<User> selectAllUser() {
         return new ArrayList<>(database.values());
