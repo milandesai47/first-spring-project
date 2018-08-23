@@ -39,15 +39,33 @@ public class FakeDataDaoTest {
                 "sd@abc.com");
         fakeDataDao.insertUser(sUid, user);
         List<User> users = fakeDataDao.selectAllUser();
-        assertEquals(users.size(),2);
+      //  assertEquals(users.size(),2);
 
         Optional<User> sd = fakeDataDao.selectUserByUserId(sUid);
-        assertEquals(sd.isPresent(),true);
+        assertTrue(sd.isPresent());
         assertSame(sd.get(),user);
     }
 
     @Test
-    public void updateUser() throws Exception{
+    public void shouldNotSelectUserByRandomUserId() throws Exception {
+       Optional<User> user = fakeDataDao.selectUserByUserId(UUID.randomUUID());
+        assertFalse(user.isPresent());
+    }
+
+    @Test
+    public void ShouldUpdateUser() throws Exception{
+        UUID mUserUid = fakeDataDao.selectAllUser().get(0).getUserUid();
+        User user = new User(mUserUid,
+                "setu",
+                "desai",
+                User.Gender.MALE,
+                26,
+                "sd@abc.com");
+        fakeDataDao.updateUser(user);
+        Optional<User> user1 = fakeDataDao.selectUserByUserId(mUserUid);
+        assertTrue(user1.isPresent());
+        assertNotEquals(user1,user);
+
     }
 
     @Test
@@ -56,10 +74,20 @@ public class FakeDataDaoTest {
         User user = users.get(0);
         fakeDataDao.deleteUser(user.getUserUid());
         Optional<User> user2 = fakeDataDao.selectUserByUserId(user.getUserUid());
+        assertFalse(user2.isPresent());
         assertEquals(user2.isPresent(),false);
     }
 
     @Test
     public void insertUser() {
+        UUID sUid = UUID.randomUUID();
+        User user = new User(sUid,
+                "setu",
+                "desai",
+                User.Gender.MALE,
+                26,
+                "sd@abc.com");
+        fakeDataDao.insertUser(sUid,user);
+        assertEquals(fakeDataDao.selectAllUser().size(),2);
     }
 }
