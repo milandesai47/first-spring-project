@@ -29,7 +29,7 @@ public class UserServiceTest {
     @Test
     public void getAllUser() {
         UUID sUid = UUID.randomUUID();
-        User user = new User(sUid,
+        User users1 = new User(sUid,
                 "setu",
                 "desai",
                 User.Gender.MALE,
@@ -37,17 +37,26 @@ public class UserServiceTest {
                 "sd@abc.com");
 
         ImmutableList<User> users = new ImmutableList.Builder<User>()
-                .add(user)
+                .add(users1)
                 .build();
         given(fakeDataDao.selectAllUser()).willReturn(users);
         List<User> allUser = userService.getAllUser();
 
         assertEquals(allUser.size(),1);
+
+        User user = allUser.get(0);
+
+        assertEquals(user.getFirstName(),"setu");
+        assertEquals(user.getLastName(),"desai");
+        assertEquals(user.getGender(), User.Gender.MALE);
+        assertEquals(user.getEmail(),"sd@abc.com");
+        assertEquals(user.getAge(),26);
+        assertNotEquals(user.getUserUid(), null);
     }
 
     @Test
     public void getUser() {
-    }
+      }
 
     @Test
     public void updateUser() {
