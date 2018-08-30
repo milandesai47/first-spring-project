@@ -11,8 +11,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -46,24 +48,76 @@ public class UserServiceTest {
 
         User user = allUser.get(0);
 
-        assertEquals(user.getFirstName(),"setu");
-        assertEquals(user.getLastName(),"desai");
+        assertUserFields(user);
+    }
+
+    private void assertUserFields(User user) {
+        assertEquals(user.getFirstName(), "setu");
+        assertEquals(user.getLastName(), "desai");
         assertEquals(user.getGender(), User.Gender.MALE);
-        assertEquals(user.getEmail(),"sd@abc.com");
-        assertEquals(user.getAge(),26);
+        assertEquals(user.getEmail(), "sd@abc.com");
+        assertEquals(user.getAge(), 26);
         assertNotEquals(user.getUserUid(), null);
     }
 
     @Test
     public void getUser() {
-      }
+        UUID sUid = UUID.randomUUID();
+        User users1 = new User(sUid,
+                "setu",
+                "desai",
+                User.Gender.MALE,
+                26,
+                "sd@abc.com");
+
+        given(fakeDataDao.selectUserByUserId(sUid)).willReturn(Optional.of(users1));
+        Optional<User> optionalUser = userService.getUser(sUid);
+
+        assertTrue(optionalUser.isPresent());
+
+       User user = optionalUser.get();
+
+        assertUserFields(user);
+
+    }
 
     @Test
     public void updateUser() {
+        UUID sUid = UUID.randomUUID();
+        User users1 = new User(sUid,
+                "setu",
+                "desai",
+                User.Gender.MALE,
+                26,
+                "sd@abc.com");
+
+        given(fakeDataDao.selectUserByUserId(sUid)).willReturn(Optional.of(users1));
+        given(fakeDataDao.updateUser(users1)).willReturn(1);
+
+        int updateResult = userService.updateUser(users1);
+
+        verify(fakeDataDao).selectUserByUserId(sUid);
+
+        assertEquals(updateResult,1);
     }
 
     @Test
     public void deleteUser() {
+        UUID sUid = UUID.randomUUID();
+        User users1 = new User(sUid,
+                "setu",
+                "desai",
+                User.Gender.MALE,
+                26,
+                "sd@abc.com");
+        given(fakeDataDao.selectUserByUserId(sUid)).willReturn(Optional.of(users1));
+        given(fakeDataDao.deleteUser(sUid)).willReturn(1);
+
+        int deleteResult = userService.deleteUser(sUid);
+
+        verify(fakeDataDao).deleteUser(sUid);
+
+        assertEquals(deleteResult,1);
     }
 
     @Test
