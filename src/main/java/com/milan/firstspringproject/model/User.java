@@ -2,7 +2,7 @@ package com.milan.firstspringproject.model;
 import java.util.UUID;
 public class User {
 
-    private final UUID userUid;
+    private UUID userUid;
     private final String firstName;
     private final String lastName;
     private final Gender gender;
@@ -22,6 +22,9 @@ public class User {
         return userUid;
     }
 
+    public void setUserUid(UUID userId){
+        this.userUid=userId;
+    }
     public String getFirstName() {
         return firstName;
     }

@@ -7,9 +7,12 @@ import jersey.repackaged.com.google.common.collect.ImmutableList;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -58,7 +61,7 @@ public class UserServiceTest {
         assertEquals(user.getEmail(), "sd@abc.com");
         assertEquals(user.getAge(), 26);
         assertNotEquals(user.getUserUid(), null);
-    }
+        }
 
     @Test
     public void getUser() {
@@ -122,5 +125,21 @@ public class UserServiceTest {
 
     @Test
     public void insertUser() {
+        UUID sUid = UUID.randomUUID();
+        User users1 = new User(null,
+                "setu",
+                "desai",
+                User.Gender.MALE,
+                26,
+                "sd@abc.com");
+
+       given(fakeDataDao.insertUser(any(UUID.class),eq(users1))).willReturn(1);
+
+        ArgumentCaptor<User> capture = ArgumentCaptor.forClass(User.class);
+       int insertResult = userService.insertUser(users1);
+        verify(fakeDataDao).insertUser(any(UUID.class),capture.capture());
+        User user = capture.getValue();
+       // assertUserFields(user);
+       assertEquals(insertResult,1);
     }
 }
