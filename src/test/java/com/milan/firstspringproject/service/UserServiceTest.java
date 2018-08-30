@@ -139,7 +139,8 @@ public class UserServiceTest {
        int insertResult = userService.insertUser(users1);
         verify(fakeDataDao).insertUser(any(UUID.class),capture.capture());
         User user = capture.getValue();
-       // assertUserFields(user);
+        assertUserFields(user);
        assertEquals(insertResult,1);
+       //assertThat();
     }
 }
