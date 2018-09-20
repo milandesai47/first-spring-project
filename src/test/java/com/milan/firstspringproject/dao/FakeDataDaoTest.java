@@ -20,7 +20,7 @@ public class FakeDataDaoTest {
     public void shouldSelectAllUser() throws Exception{
         List<User> users = fakeDataDao.selectAllUser();
         User user = users.get(0);
-        assertEquals(user.getFirstName(),"milan1");
+        assertEquals(user.getFirstName(),"milan");
         assertEquals(user.getLastName(),"desai");
         assertEquals(user.getGender(), User.Gender.MALE);
         assertEquals(user.getEmail(),"md@abc.com");
