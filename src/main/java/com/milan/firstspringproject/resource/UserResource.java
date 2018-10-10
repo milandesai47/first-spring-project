@@ -62,7 +62,7 @@ public class UserResource {
     }
 
     @RequestMapping(
-            method = RequestMethod.DELETE,,
+            method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE,
             path = "{userUid}"
     )
