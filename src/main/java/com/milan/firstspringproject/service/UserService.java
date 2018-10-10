@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 @Service
 public class UserService {
 
@@ -18,8 +20,19 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public List<User> getAllUser() {
-        return userDao.selectAllUser();
+    public List<User> getAllUser(Optional<String> gender) {
+        List<User> users = userDao.selectAllUser();
+        if(!gender.isPresent()){
+            return users;
+        }
+         try{
+             User.Gender theGender = User.Gender.valueOf(gender.get().toUpperCase());
+             return users.stream()
+                    .filter(user -> user.getGender().equals(theGender))
+                    .collect(Collectors.toList());
+        } catch(Exception e){
+            throw new IllegalStateException("Invalid Gender ",e);
+        }
     }
 
 

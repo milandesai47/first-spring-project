@@ -45,13 +45,41 @@ public class UserServiceTest {
                 .add(users1)
                 .build();
         given(fakeDataDao.selectAllUser()).willReturn(users);
-        List<User> allUser = userService.getAllUser();
+        List<User> allUser = userService.getAllUser(Optional.empty());
 
         assertEquals(allUser.size(),1);
 
         User user = allUser.get(0);
 
         assertUserFields(user);
+    }
+
+    @Test
+    public void getUserByGender() {
+        UUID sUid = UUID.randomUUID();
+        User users1 = new User(sUid,
+                "setu",
+                "desai",
+                User.Gender.MALE,
+                26,
+                "sd@abc.com");
+        UUID aUid = UUID.randomUUID();
+        User users2 = new User(sUid,
+                "abc",
+                "desai",
+                User.Gender.FEMALE,
+                26,
+                "abcd@abc.com");
+
+        ImmutableList<User> users = new ImmutableList.Builder<User>()
+                .add(users1)
+                .add(users2)
+                .build();
+        given(fakeDataDao.selectAllUser()).willReturn(users);
+
+        List<User> filteredUser = userService.getAllUser(Optional.of("male"));
+
+        assertEquals(filteredUser.size(),1);
     }
 
     private void assertUserFields(User user) {
@@ -62,6 +90,11 @@ public class UserServiceTest {
         assertEquals(user.getAge(), 26);
         assertNotEquals(user.getUserUid(), null);
         }
+
+    @Test
+    public void throwExceptionOnInvalidGender() throws Exception{
+        //TODO
+    }
 
     @Test
     public void getUser() {
