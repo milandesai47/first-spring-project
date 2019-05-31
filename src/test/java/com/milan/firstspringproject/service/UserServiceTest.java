@@ -2,7 +2,6 @@ package com.milan.firstspringproject.service;
 
 import com.milan.firstspringproject.dao.FakeDataDao;
 import com.milan.firstspringproject.model.User;
-import com.sun.javafx.collections.ImmutableObservableList;
 import jersey.repackaged.com.google.common.collect.ImmutableList;
 import org.junit.Assert;
 import org.junit.Before;
