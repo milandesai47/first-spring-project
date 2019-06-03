@@ -1,0 +1,3 @@
+com\milan\firstspringproject\FirstSpringProjectApplicationTests.class
+com\milan\firstspringproject\dao\FakeDataDaoTest.class
+com\milan\firstspringproject\service\UserServiceTest.class

@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Implementation-Title: first-spring-project
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: mdesai
+Implementation-Vendor-Id: com.milan
+Spring-Boot-Version: 2.0.4.RELEASE
+Main-Class: org.springframework.boot.loader.JarLauncher
+Start-Class: com.milan.firstspringproject.FirstSpringProjectApplicatio
+ n
+Spring-Boot-Classes: BOOT-INF/classes/
+Spring-Boot-Lib: BOOT-INF/lib/
+Created-By: Apache Maven 3.5.0
+Build-Jdk: 1.8.0_212-3-redhat
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/first-spring-project
+

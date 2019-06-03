@@ -1,0 +1,8 @@
+com\milan\firstspringproject\model\User$Gender.class
+com\milan\firstspringproject\FirstSpringProjectApplication.class
+com\milan\firstspringproject\resource\UserResource$ErrorMessage.class
+com\milan\firstspringproject\resource\UserResource.class
+com\milan\firstspringproject\service\UserService.class
+com\milan\firstspringproject\dao\FakeDataDao.class
+com\milan\firstspringproject\dao\UserDao.class
+com\milan\firstspringproject\model\User.class
