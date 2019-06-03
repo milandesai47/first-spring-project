@@ -1,5 +1,5 @@
 FROM java:8
-WORKDIR C:\codebase\first-spring-project-master\first-spring-project-master
+#WORKDIR C:\codebase\first-spring-project-master\first-spring-project-master
 VOLUME /tmp
 ARG DEPENDENCY=target/dependency
 ADD ${WORKDIR}/target/first-spring-project-0.0.1-SNAPSHOT.jar first-spring-project-0.0.1-SNAPSHOT.jar

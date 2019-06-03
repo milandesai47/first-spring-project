@@ -24,7 +24,7 @@ public class FakeDataDaoTest {
         assertEquals(user.getLastName(),"desai");
         assertEquals(user.getGender(), User.Gender.MALE);
         assertEquals(user.getEmail(),"md@abc.com");
-        assertEquals(user.getAge(),22);
+        assertEquals(user.getAge(),25);
         assertNotEquals(user.getUserUid(), null);
     }
 
@@ -39,7 +39,7 @@ public class FakeDataDaoTest {
                 "sd@abc.com");
         fakeDataDao.insertUser(sUid, user);
         List<User> users = fakeDataDao.selectAllUser();
-        assertEquals(users.size(),2);
+        assertEquals(users.size(),3);
 
         Optional<User> sd = fakeDataDao.selectUserByUserId(sUid);
         assertTrue(sd.isPresent());
@@ -89,7 +89,7 @@ public class FakeDataDaoTest {
                 "sd@abc.com");
         fakeDataDao.insertUser(sUid,user);
         List<User> users = fakeDataDao.selectAllUser();
-        assertEquals(users.size(),2);
+        assertEquals(users.size(),3);
         assertSame(fakeDataDao.selectUserByUserId(sUid).get(),user);
     }
 }
